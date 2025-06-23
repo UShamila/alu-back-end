@@ -21,7 +21,7 @@ def get_employee_todos(employee_id):
     Get the TODO list of the employee by employee ID
     """
     url = ("https://jsonplaceholder.typicode.com/users/{}/todos"
-       .format(employee_id))
+           .format(employee_id))
     response = requests.get(url)
     return response.json()
 
