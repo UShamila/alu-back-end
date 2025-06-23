@@ -11,7 +11,8 @@ def get_employee_info(employee_id):
     """
     Get employee information by employee ID
     """
-    url = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+    url = ("https://jsonplaceholder.typicode.com/users/{}/todos"
+       .format(employee_id))
     response = requests.get(url)
     return response.json()
 
@@ -20,7 +21,8 @@ def get_employee_todos(employee_id):
     """
     Get the TODO list of the employee by employee ID
     """
-    url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
+    url = ("https://jsonplaceholder.typicode.com/users/{}/todos"
+       .format(employee_id))
     response = requests.get(url)
     return response.json()
 
