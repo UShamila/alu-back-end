@@ -61,4 +61,3 @@ if __name__ == "__main__":
         main(argv[1])
     else:
         print("Usage: ./1-export_to_CSV.py <employee_id>")
-
