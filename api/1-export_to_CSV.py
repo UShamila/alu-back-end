@@ -20,7 +20,8 @@ def get_employee_todos(employee_id):
     """
     Get the TODO list of the employee by employee ID
     """
-    url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(employee_id)
+    url = ('https://jsonplaceholder.typicode.com/users/{}/todos'
+           .format(employee_id))
     response = requests.get(url)
     return response.json()
 
@@ -31,10 +32,10 @@ def export_to_csv(employee_id, username, todos):
     """
     filename = '{}.csv'.format(employee_id)
     with open(filename, mode='w', newline='') as file:
-        file_writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
+        writer = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
         for todo in todos:
-            rowData = [employee_id, username, todo['completed'], todo['title']]
-            file_writer.writerow(rowData)
+            row = [employee_id, username, todo['completed'], todo['title']]
+            writer.writerow(row)
 
 
 def main(employee_id):
@@ -45,6 +46,12 @@ def main(employee_id):
     username = user.get("username")
 
     todos = get_employee_todos(employee_id)
+
+    completed = [t for t in todos if t.get('completed') is True]
+    print("Employee {} is done with tasks({}/{}):".format(
+        user.get("name"), len(completed), len(todos)))
+    for task in completed:
+        print("\t {}".format(task.get("title")))
 
     export_to_csv(employee_id, username, todos)
 
